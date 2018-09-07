@@ -3,6 +3,9 @@
 This repository contains open-source code for [Data Studio Community
 Visualizations](https://developers.google.com/datastudio/visualization).
 
+Community visualizations allow Data Studio users to create custom visualizations
+that integrate into their dashboards.
+
 
 ## Trusted testing
 The community visualization feature is currently in trusted testing. You will
@@ -14,3 +17,10 @@ If you are not part of the trusted testing group, sign up [using this
 form](https://docs.google.com/forms/d/e/1FAIpQLSeYSUq-ligS_ld1iefqYXjDnCnrEgSbgSxWmLwyC45JlUrfOQ/viewform).
 Please note that it can take a couple business days to be added to the group.
 
+## Visualizations
+
+## Utilities
+These are scripts and other tooling that helps developers working on community
+visualizations. 
+
+### Community contributions 
