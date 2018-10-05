@@ -4,14 +4,14 @@
   "description": "This repository contains open-source code for [Data Studio Community Visualizations](https://developers.google.com/datastudio/visualization).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prettier": "prettier --write \"**/*.js\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/googledatastudio/community-visualizations.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Yulan Lin",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/googledatastudio/community-visualizations/issues"
   },

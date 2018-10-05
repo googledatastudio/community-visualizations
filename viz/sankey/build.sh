@@ -1,17 +1,33 @@
 #!/bin/bash
+###
+# Instructions for use:
+# TODO: Replace the DEV_BUCKET and PROD_BUCKET variables with the URI
+# of your own GCS bucket.
+# Usage:
+# To deploy to the DEV_BUCKET with devMode: true,
+# $bash build.sh
+# To deploy to the PROD_BUCKET with devMode: false,
+# $bash build.sh -prod
+###
 DEV_BUCKET="yulanlin-cv-dev/sankey"
 PROD_BUCKET="public-community-viz-showcase-reports/sankey"
 
+# remove the deploy folder if it exists
 rm -rf deploy
+# create a new deploy folder
 mkdir -p deploy
-cat ~/Code/ds-component/_bundles/dscc.js > deploy/sankey.js
-cat src/d3.min.js >> deploy/sankey.js
-cat src/d3-sankey.min.js >> deploy/sankey.js
-cat src/index.js >> deploy/sankey.js
+
+# create the combined visualization JavaScript file
+# TODO: Make sure that the location of dscc.min.js is correct
+# TODO: Make sure that the location of d3.min.js and d3-sankey.min.js are
+# correct
+
+cat src/dscc.min.js src/d3.min.js src/d3-sankey.min.js src/index.js  > deploy/sankey.js
 
 cp src/sankey.json deploy/sankey.json
+cp src/manifest.json deploy/manifest.json
 
-# default to dev unless prod arg passed
+# Toggle whether or not to deploy to dev or prod buckets
 if [ $1 == "-prod" ]
 then
   echo "deploying to $PROD_BUCKET"
