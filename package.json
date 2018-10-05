@@ -1,0 +1,22 @@
+{
+  "name": "community-visualizations",
+  "version": "1.0.0",
+  "description": "This repository contains open-source code for [Data Studio Community Visualizations](https://developers.google.com/datastudio/visualization).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/googledatastudio/community-visualizations.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/googledatastudio/community-visualizations/issues"
+  },
+  "homepage": "https://github.com/googledatastudio/community-visualizations#readme",
+  "dependencies": {
+    "prettier": "^1.14.3"
+  }
+}
