@@ -25,7 +25,7 @@ function drawViz(vizData) {
   }
 
   // Use the Bar Color style element value to set the rectangle color.
-  ctx.fillStyle = vizData.config.style[0].value;
+  ctx.fillStyle = vizData.config.style[0].elements[0].value.color;
 
   // Calculate height and draw bars for each row of data.
   for (var i = 0; i < data.length; i++) {
