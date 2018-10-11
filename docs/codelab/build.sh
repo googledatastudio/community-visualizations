@@ -1,10 +1,6 @@
 #!/bin/bash
 
-###
-# Instructions for use:
-# TODO: Replace the DEV_BUCKET variable with the URI
-# of your own GCS bucket.
-###
+DSCC_LOCATION="https://raw.githubusercontent.com/googledatastudio/ds-component/b9ef28379f4d5ad6fba743f73d1b6a0fd73744c2/_bundles/dscc.min.js"
 DEV_BUCKET="community-viz-docs/codelab"
 
 # remove the deploy folder if it exists
@@ -12,9 +8,8 @@ rm -rf deploy
 # create a new deploy folder
 mkdir -p deploy
 
-# create the combined visualization JavaScript file
-# TODO: Make sure that the location of dscc.min.js is correct
-cat src/dscc.min.js src/myVizSource.js > deploy/myViz.js
+curl $DSCC_LOCATION > deploy/myViz.js
+cat src/myVizSource.js >> deploy/myViz.js
 
 
 # copy the CSS, config JSON, and manifest JSON to the deploy folder

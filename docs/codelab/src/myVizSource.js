@@ -19,13 +19,25 @@ function drawViz(vizData) {
   ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
   // 'barMetric' comes from the id defined in myViz.json
-  var rowsTotal = 0;
-  for (var i = 0; i < data.length; i++) {
-    rowsTotal += data[i]["barMetric"][0];
-  }
+  var rowsTotal = data.reduce(function(acc, row){
+    return acc += row["barMetric"][0]
+  }, 0);
+
+  // parse the style to an object with keys "configId": "value"
+  var parsedStyle = {};
+  var flattenedStyle = vizData.config.style.reduce(function(acc, section){
+    return acc.concat(section.elements);
+  }, []);
+
+  flattenedStyle.forEach(function(d){
+    parsedStyle[d.id] = d.value;
+  });
 
   // Use the Bar Color style element value to set the rectangle color.
-  ctx.fillStyle = vizData.config.style[0].elements[0].value.color;
+  ctx.fillStyle = parsedStyle.barColor.color;
+
+
+  var textYOffset = 20;
 
   // Calculate height and draw bars for each row of data.
   for (var i = 0; i < data.length; i++) {
@@ -41,7 +53,7 @@ function drawViz(vizData) {
     ctx.fillText(
       data[i]["barDimension"][0],
       barX + barWidth / 4,
-      maxBarHeight + 20
+      maxBarHeight + textYOffset
     );
   }
 }
