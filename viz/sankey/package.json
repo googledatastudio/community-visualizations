@@ -1,17 +1,15 @@
 {
-  "name": "modular",
   "main": "index.js",
   "config": {
-    "comment": "---- Edit these config values as needed ----",
-    "gcs_dev_bucket": "YOUR_DEV_BUCKET",
-    "gcs_prod_bucket": "YOUR_PROD_BUCKET",
-    "js_file": "index.js",
-    "json_file": "index.json",
-    "manifest_file": "manifest.json"
+    "gcsDevBucket": "YOUR_DEV_BUCKET",
+    "gcsProdBucket": "YOUR_PROD_BUCKET",
+    "jsFile": "index.js",
+    "jsonFile": "index.json",
+    "manifestFile": "manifest.json"
   },
   "scripts": {
-    "build:dev": "node scripts/build.js dev",
-    "build:prod": "node scripts/build.js prod",
+    "build:dev": "node scripts/build.js --dev true",
+    "build:prod": "node scripts/build.js --dev false",
     "push:dev": "(cd ./dist && gsutil cp -a public-read * $npm_package_config_gcs_dev_bucket)",
     "push:prod": "(cd ./dist && gsutil cp -a public-read * $npm_package_config_gcs_prod_bucket)"
   },
@@ -24,6 +22,8 @@
   },
   "dependencies": {
     "@google/dscc": "0.1.3",
+    "bluebird": "^3.5.2",
+    "commander": "^2.19.0",
     "d3": "5.7.0",
     "d3-sankey": "^0.7.1"
   }

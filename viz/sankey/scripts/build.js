@@ -1,73 +1,76 @@
-const fs = require('fs');
+// imports
 const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const program = require('commander');
+const Promise = require('bluebird');
+const fs = Promise.promisifyAll(require('fs'));
 
-const devBucket = process.env.npm_package_config_gcs_dev_bucket;
-const prodBucket = process.env.npm_package_config_gcs_prod_bucket;
-const manifestFile = process.env.npm_package_config_manifest_file;
-const jsFile = process.env.npm_package_config_js_file;
-const jsonFile = process.env.npm_package_config_json_file;
+// constants
+const DEV_BUCKET = process.env.npm_package_config_gcsDevBucket;
+const PROD_BUCKET = process.env.npm_package_config_gcsProdBucket;
+const MANIFEST_FILE = process.env.npm_package_config_manifestFile;
+const JS_FILE = process.env.npm_package_config_jsFile;
+const JSON_FILE = process.env.npm_package_config_jsonFile;
 
-// whether the command-line arg is "dev" or "prod"
-const devMode = process.argv[2] === 'dev' ? true : false;
-const bucketLocation = process.argv[2] === 'dev' ? devBucket : prodBucket;
+// configure command-line arguments
+program
+  .option('-d, --dev', 'Build for development?', /^(true|false)$/i, true)
+  .parse(process.argv);
+
+// default to dev if it's not prod
+const DEVMODE = program.args[0] === 'true' ? true : false;
+const GCS_BUCKET = DEVMODE ? DEV_BUCKET : PROD_BUCKET;
 
 const encoding = 'utf-8';
 
-const readFile = (filePath, encoding) => {
-  return new Promise((resolve, reject) => {
-    fs.readFile(filePath, encoding, (err, data) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(data);
-      }
-    });
-  });
-};
-
-const writeFile = (filePath, data) => {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(filePath, data, err => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
-  });
-};
-
-const compiler = webpack({
+// common options
+let webpackOptions = {
   mode: 'development',
   devtool: 'inline-source-map',
   entry: {
     // this is the viz source code
-    main: path.resolve(__dirname, '../src/', jsFile),
+    main: path.resolve(__dirname, '..', 'src', JS_FILE),
   },
   output: {
-    filename: jsFile,
-    path: path.resolve(__dirname, '../dist'),
+    filename: JS_FILE,
+    path: path.resolve(__dirname, '..', 'dist'),
   },
   plugins: [
-    new CopyWebpackPlugin([
-      {from: path.join('./src', jsonFile), to: '.'}
-    ]),
+    new CopyWebpackPlugin([{from: path.join('src', JSON_FILE), to: '.'}]),
   ],
-});
+};
+
+if (DEVMODE === true) {
+  const devOptions = {
+    mode: 'development',
+    devtool: 'inline-source-map',
+  };
+  webpackOptions = Object.assign(webpackOptions, devOptions);
+} else {
+  const prodOptions = {
+    mode: 'production',
+    optimization: {
+      minimizer: [new UglifyJsPlugin()],
+    },
+  };
+  webpackOptions = Object.assign(webpackOptions, prodOptions);
+}
+
+const compiler = webpack(webpackOptions);
 
 // put everything together except the manifest
 compiler.run((err, stats) => {
   // once dist is created...
-  readFile(path.join('./src', manifestFile), encoding).then(value => {
+  fs.readFileAsync(path.join('src', MANIFEST_FILE), encoding).then(value => {
     const newManifest = value
-      .replace(/YOUR_GCS_BUCKET/g, bucketLocation)
-      .replace(/"DEVMODE_BOOL"/, devMode);
-    writeFile(path.join('./dist', manifestFile), newManifest).catch(err => {
-      console.log('Unable to write manifest: ', err);
-    });
+      .replace(/YOUR_GCS_BUCKET/g, GCS_BUCKET)
+      .replace(/"DEVMODE_BOOL"/, DEVMODE);
+    fs.writeFileAsync(path.join('./dist', MANIFEST_FILE), newManifest).catch(
+      err => {
+        console.log('Unable to write manifest: ', err);
+      }
+    );
   });
 });
-
-// make appropriate substitutions to the manifest

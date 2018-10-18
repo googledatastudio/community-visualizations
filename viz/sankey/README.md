@@ -9,9 +9,9 @@ ID:
 `gs://public-community-viz-showcase-reports/sankey`
 
 
-## Instructions for use
+## Instructions
 
-Replace "YOUR_DEV_BUCKET" and "YOUR_PROD_BUCKET" in the `package.json` file with
+Replace "YOUR_DEV_BUCKET" and "YOUR_PROD_BUCKET" in `package.json` file with
 your own GCS buckets. 
 
 
