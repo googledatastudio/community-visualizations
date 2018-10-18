@@ -16,19 +16,17 @@ const JSON_FILE = process.env.npm_package_config_jsonFile;
 
 // configure command-line arguments
 program
-  .option('-d, --dev', 'Build for development?', /^(true|false)$/i, true)
+  .option('-p, --prod', 'Build for prod?', /^(true|false)$/i, true)
   .parse(process.argv);
 
 // default to dev if it's not prod
-const DEVMODE = program.args[0] === 'true' ? true : false;
+const DEVMODE = program.args[0] === 'true' ? false : true;
 const GCS_BUCKET = DEVMODE ? DEV_BUCKET : PROD_BUCKET;
 
 const encoding = 'utf-8';
 
 // common options
 let webpackOptions = {
-  mode: 'development',
-  devtool: 'inline-source-map',
   entry: {
     // this is the viz source code
     main: path.resolve(__dirname, '..', 'src', JS_FILE),
@@ -52,7 +50,12 @@ if (DEVMODE === true) {
   const prodOptions = {
     mode: 'production',
     optimization: {
-      minimizer: [new UglifyJsPlugin()],
+      minimizer: [new UglifyJsPlugin({
+        sourceMap: false,
+        uglifyOptions: {
+          comments: false
+        }
+      })],
     },
   };
   webpackOptions = Object.assign(webpackOptions, prodOptions);

@@ -1,5 +1,4 @@
 {
-  "main": "index.js",
   "config": {
     "gcsDevBucket": "YOUR_DEV_BUCKET",
     "gcsProdBucket": "YOUR_PROD_BUCKET",
@@ -8,12 +7,15 @@
     "manifestFile": "manifest.json"
   },
   "scripts": {
-    "build:dev": "node scripts/build.js --dev true",
-    "build:prod": "node scripts/build.js --dev false",
-    "push:dev": "(cd ./dist && gsutil cp -a public-read * $npm_package_config_gcs_dev_bucket)",
-    "push:prod": "(cd ./dist && gsutil cp -a public-read * $npm_package_config_gcs_prod_bucket)"
+    "build:dev": "node scripts/build.js --prod false",
+    "build:prod": "node scripts/build.js --prod true",
+    "push:dev": "node scripts/push.js --prod false",
+    "push:prod": "node scripts/push.js --prod true"
   },
   "devDependencies": {
+    "shelljs": "^0.8.2",
+    "bluebird": "^3.5.2",
+    "commander": "^2.19.0",
     "webpack-merge": "4.1.4",
     "copy-webpack-plugin": "^4.5.3",
     "webpack-plugin-replace": "^1.1.1",
@@ -22,8 +24,6 @@
   },
   "dependencies": {
     "@google/dscc": "0.1.3",
-    "bluebird": "^3.5.2",
-    "commander": "^2.19.0",
     "d3": "5.7.0",
     "d3-sankey": "^0.7.1"
   }
