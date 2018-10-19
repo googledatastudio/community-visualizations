@@ -12,7 +12,7 @@ ID:
 ## Instructions
 
 Replace "YOUR_DEV_BUCKET" and "YOUR_PROD_BUCKET" in `package.json` file with
-your own GCS buckets. 
+your own GCS buckets.
 
 
 Make sure you have [npm][npm_site] and
@@ -42,6 +42,6 @@ npm run push:prod
 ```
 
 
-[showcase]: https://developers.google.com/visualization "Community Visualization Gallery"
+[showcase]: https://developers.google.com/datastudio/visualization/ "Community Visualization Gallery"
 [npm_site]: https://www.npmjs.com/ "Node Package Manager"
 [gsutil_site]: https://cloud.google.com/storage/docs/gsutil "gsutil Tool docs"
