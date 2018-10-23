@@ -15,6 +15,10 @@ Filename           | Codelab step
 `myVizSource3.js`  | [Step 13](https://codelabs.developers.google.com/codelabs/community-visualization/#13)
 `myVizSource4.js`  | [Step 14](https://codelabs.developers.google.com/codelabs/community-visualization/#14)
 
+
+To use the bash build and deploy script, run the command below, replacing
+`my-viz-bucket-path` with your own GCS bucket path.
+
 ```bash
 bash build.sh gs://my-viz-bucket-path
 ```
