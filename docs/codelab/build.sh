@@ -9,7 +9,7 @@ rm -rf deploy
 mkdir -p deploy
 
 curl $DSCC_LOCATION > deploy/myViz.js
-cat src/myVizSource.js >> deploy/myViz.js
+cat src/myVizSource4.js >> deploy/myViz.js
 
 
 # copy the CSS, config JSON, and manifest JSON to the deploy folder

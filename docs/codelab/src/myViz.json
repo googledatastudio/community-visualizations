@@ -2,7 +2,7 @@
   "data": [
     {
       "id": "concepts",
-      "heading": "Concepts",
+      "label": "Concepts",
       "elements": [
         {
           "id": "barDimension",
@@ -28,13 +28,13 @@
   "style": [
     {
       "id": "color",
-      "heading": "Colors",
+      "label": "Colors",
       "elements": [
         {
           "type": "FONT_COLOR",
           "id": "barColor",
           "label": "Bar Color",
-          "defaultValue": "#000"
+          "defaultValue": "#000000"
         }
       ]
     }
