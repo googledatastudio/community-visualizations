@@ -9,6 +9,7 @@ to a different step in the codelab. To deploy at each step, edit the build
 script to build the corresponding `myVizSource.js` file.
 
 Filename           | Codelab step
+-------------------|--------------------------
 `myVizSource1.js`  | [Step 4](https://codelabs.developers.google.com/codelabs/community-visualization/#4)
 `myVizSource2.js`  | [Step 12](https://codelabs.developers.google.com/codelabs/community-visualization/#12)
 `myVizSource3.js`  | [Step 13](https://codelabs.developers.google.com/codelabs/community-visualization/#13)
