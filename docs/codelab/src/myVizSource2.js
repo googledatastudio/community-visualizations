@@ -17,8 +17,8 @@ function drawViz(vizData) {
   // parse the style object
   var parsedStyle = {};
 
-  for (let section of vizData.config.style) {
-    for (let element of section.elements) {
+  for (let styleSection of vizData.config.style) {
+    for (let element of styleSection.elements) {
       parsedStyle[element.id] = {
         value: element.value,
         defaultValue: element.defaultValue
