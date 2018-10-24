@@ -1,12 +1,11 @@
 # Community visualization codelab
 
 This code is the end result of the [community visualization
-codelab](https://codelabs.developers.google.com/). To use the [build
-script](./build.sh), pass in your own GCS bucket path, for example:
+codelab](https://codelabs.developers.google.com/).
 
 The [src](./src) folder contains 4 `myVizSource.js` files, which each correspond
-to a different step in the codelab. To deploy at each step, edit the build
-script to build the corresponding `myVizSource.js` file.
+to a different step in the codelab. To deploy at each step, run the build
+script with the corresponding `myVizSource.js` file as a parameter.
 
 Filename           | Codelab step
 -------------------|--------------------------
@@ -17,10 +16,11 @@ Filename           | Codelab step
 
 
 To use the bash build and deploy script, run the command below, replacing
-`my-viz-bucket-path` with your own GCS bucket path.
+`my-viz-bucket-path` with your own GCS bucket path, and `myVizSource1.js` with
+the step in the codelab you want to build.
 
 ```bash
-bash build.sh gs://my-viz-bucket-path
+bash build.sh gs://my-viz-bucket-path src/myVizSource1.js
 ```
 
 ### Try it out

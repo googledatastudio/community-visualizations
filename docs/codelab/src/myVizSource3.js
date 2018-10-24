@@ -26,8 +26,8 @@ function drawViz(vizData) {
   // parse the style object
   var parsedStyle = {};
 
-  for (let section of vizData.config.style) {
-    for (let element of section.elements) {
+  for (let styleSection of vizData.config.style) {
+    for (let element of styleSection.elements) {
       parsedStyle[element.id] = {
         value: element.value,
         defaultValue: element.defaultValue
@@ -56,11 +56,11 @@ function drawViz(vizData) {
 
     ctx.fillRect(barX, maxBarHeight, barWidth, barHeight);
 
-    ctx.fillText(
-      row['barDimension'][0],
-      barX + barWidth / 4,
-      maxBarHeight + textYOffset
-    );
+    var barText = row['barDimension'][0];
+    var textX = barX + barWidth / 4;
+    var textY = maxBarHeight + textYOffset;
+
+    ctx.fillText(barText, textX, textY);
   });
 }
 

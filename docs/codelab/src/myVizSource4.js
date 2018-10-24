@@ -1,5 +1,4 @@
 // create a title element
-
 var titleElement = document.createElement('div');
 titleElement.id = 'myVizTitle';
 document.body.appendChild(titleElement);
@@ -32,8 +31,8 @@ function drawViz(vizData) {
   // parse the style object
   var parsedStyle = {};
 
-  for (let section of vizData.config.style) {
-    for (let element of section.elements) {
+  for (let styleSection of vizData.config.style) {
+    for (let element of styleSection.elements) {
       parsedStyle[element.id] = {
         value: element.value,
         defaultValue: element.defaultValue
@@ -41,7 +40,7 @@ function drawViz(vizData) {
     }
   }
 
-  // fill the bars using the user-selected bar color
+  // fill the bars using the user-selected bar color or the default
   ctx.fillStyle = parsedStyle.barColor.value.color || parsedStyle.barColor.defaultValue;
 
   // obtain the maximum bar metric value for scaling purposes
@@ -62,26 +61,26 @@ function drawViz(vizData) {
 
     ctx.fillRect(barX, maxBarHeight, barWidth, barHeight);
 
-    ctx.fillText(
-      row['barDimension'][0],
-      barX + barWidth / 4,
-      maxBarHeight + textYOffset
-    );
+    var barText = row['barDimension'][0];
+    var textX = barX + barWidth / 4;
+    var textY = maxBarHeight + textYOffset;
+
+    ctx.fillText(barText, textX, textY);
   });
 
   // Update the title element using dimension/metric names.
   var titleElement = document.getElementById('myVizTitle');
 
   // Get the fields indexed by Data Studio ID
-  var fieldsByDsID = dscc.fieldsById(vizData);
+  var fieldsById = dscc.fieldsById(vizData);
 
   // Get the Data Studio ID of the metric and dimension
   var metricId = vizData.config.data[0].elements[1].value[0];
   var dimensionId = vizData.config.data[0].elements[0].value[0];
 
   // Get the human-readable name of the metric and dimension
-  var metricName = fieldsByDsID[metricId].name;
-  var dimensionName = fieldsByDsID[dimensionId].name;
+  var metricName = fieldsById[metricId].name;
+  var dimensionName = fieldsById[dimensionId].name;
 
   titleElement.innerText = metricName + ' by ' + dimensionName;
 

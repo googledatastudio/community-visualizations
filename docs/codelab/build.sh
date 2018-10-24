@@ -1,7 +1,8 @@
 #!/bin/bash
 
 DSCC_LOCATION="https://raw.githubusercontent.com/googledatastudio/ds-component/b9ef28379f4d5ad6fba743f73d1b6a0fd73744c2/_bundles/dscc.min.js"
-DEV_BUCKET="community-viz-docs/codelab"
+DEV_BUCKET=$1
+SOURCE_FILE=$2
 
 # remove the deploy folder if it exists
 rm -rf deploy
@@ -9,7 +10,7 @@ rm -rf deploy
 mkdir -p deploy
 
 curl $DSCC_LOCATION > deploy/myViz.js
-cat src/myVizSource4.js >> deploy/myViz.js
+cat $SOURCE_FILE >> deploy/myViz.js
 
 
 # copy the CSS, config JSON, and manifest JSON to the deploy folder

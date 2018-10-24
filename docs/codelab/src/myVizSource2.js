@@ -5,8 +5,6 @@ canvasElement.id = 'myViz';
 document.body.appendChild(canvasElement);
 
 function drawViz(vizData) {
-  // parse the data into a row of rows format
-  var data = dscc.rowsByConfigId(vizData).DEFAULT;
   var ctx = canvasElement.getContext('2d');
 
   // clear the canvas.
