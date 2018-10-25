@@ -4,30 +4,35 @@ var ctx = canvasElement.getContext('2d');
 canvasElement.id = 'myViz';
 document.body.appendChild(canvasElement);
 
+function styleById(message){
+  // parse the style object
+  var styleById = {};
+
+  for (let styleSection of vizData.config.style) {
+    for (let styleElement of styleSection.elements) {
+      styleById[element.id] = {
+        value: element.value,
+        defaultValue: element.defaultValue
+      };
+    }
+  }
+  return styleById;
+}
+
 function drawViz(vizData) {
   var ctx = canvasElement.getContext('2d');
 
   // clear the canvas.
   ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
-  // set the width and height
+  // set the canvas width and height
   ctx.canvas.width = dscc.getWidth() - 20;
   ctx.canvas.height = dscc.getHeight() - 100;
 
-  // parse the style object
-  var parsedStyle = {};
+  var styleById = styleById(message);
 
-  for (let styleSection of vizData.config.style) {
-    for (let element of styleSection.elements) {
-      parsedStyle[element.id] = {
-        value: element.value,
-        defaultValue: element.defaultValue
-      };
-    }
-  }
-
-  // fill the bars using the user-selected bar color
-  ctx.fillStyle = parsedStyle.barColor.value.color || parsedStyle.barColor.defaultValue;
+  // fill the bars using the user-selected bar color or the default
+  ctx.fillStyle = styleById.barColor.value.color || styleById.barColor.defaultValue;
   ctx.fillRect(10, 10, 100, 100);
 
 }

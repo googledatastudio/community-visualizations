@@ -9,6 +9,21 @@ var ctx = canvasElement.getContext('2d');
 canvasElement.id = 'myViz';
 document.body.appendChild(canvasElement);
 
+function styleById(message){
+  // parse the style object
+  var styleById = {};
+
+  for (let styleSection of vizData.config.style) {
+    for (let styleElement of styleSection.elements) {
+      styleById[element.id] = {
+        value: element.value,
+        defaultValue: element.defaultValue
+      };
+    }
+  }
+  return styleById;
+}
+
 function drawViz(vizData) {
   // parse the data into a row of rows format
   var data = dscc.rowsByConfigId(vizData).DEFAULT;
@@ -17,7 +32,7 @@ function drawViz(vizData) {
   // clear the canvas.
   ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
-  // set the width and height
+  // set the canvas width and height
   ctx.canvas.width = dscc.getWidth() - 20;
   ctx.canvas.height = dscc.getHeight() - 100;
 
@@ -28,35 +43,30 @@ function drawViz(vizData) {
   // vertical offset for bar text
   var textYOffset = 20;
 
-  // parse the style object
-  var parsedStyle = {};
-
-  for (let styleSection of vizData.config.style) {
-    for (let element of styleSection.elements) {
-      parsedStyle[element.id] = {
-        value: element.value,
-        defaultValue: element.defaultValue
-      };
-    }
-  }
+  var styleById = styleById(message);
 
   // fill the bars using the user-selected bar color or the default
-  ctx.fillStyle = parsedStyle.barColor.value.color || parsedStyle.barColor.defaultValue;
+  ctx.fillStyle = styleById.barColor.value.color || styleById.barColor.defaultValue;
 
   // obtain the maximum bar metric value for scaling purposes
-  var barData = data.map(function(row) {
-    return row['barMetric'][0];
-  });
-  var metricMax = Math.max(...barData);
+  var metricMax = 0;
+  data.forEach(function(row){
+    metricMax = Math.max(metricMax, row['barMetric'][0];
+  })
 
 
   // draw bars
   // add dimension labels below bars
   // 'barDimension' and 'barMetric' come from the id defined in myViz.json
   data.forEach(function(row, i) {
+    // calculates the height of the bar using the row value, maximum bar
+    // height, and the maximum metric value calculated earlier
     var barHeight = Math.round(
       -1 * ((row['barMetric'][0] * maxBarHeight) / metricMax)
     );
+
+    // calculates the x coordinate of the bar based on the width of the convas
+    // and the width of the bar
     var barX = (ctx.canvas.width / data.length) * i + barWidth / 2;
 
     ctx.fillRect(barX, maxBarHeight, barWidth, barHeight);
