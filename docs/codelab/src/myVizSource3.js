@@ -4,15 +4,15 @@ var ctx = canvasElement.getContext('2d');
 canvasElement.id = 'myViz';
 document.body.appendChild(canvasElement);
 
-function styleById(message){
+function transformStyleById(vizData){
   // parse the style object
   var styleById = {};
 
   for (let styleSection of vizData.config.style) {
     for (let styleElement of styleSection.elements) {
-      styleById[element.id] = {
-        value: element.value,
-        defaultValue: element.defaultValue
+      styleById[styleElement.id] = {
+        value: styleElement.value,
+        defaultValue: styleElement.defaultValue
       };
     }
   }
@@ -20,10 +20,8 @@ function styleById(message){
 }
 
 function drawViz(vizData) {
-  console.log(vizData);
   // parse the data into a row of rows format
   var data = dscc.rowsByConfigId(vizData).DEFAULT;
-  console.log(data);
   var ctx = canvasElement.getContext('2d');
 
   // clear the canvas.
@@ -33,7 +31,7 @@ function drawViz(vizData) {
   ctx.canvas.width = dscc.getWidth() - 20;
   ctx.canvas.height = dscc.getHeight() - 100;
 
-  var styleById = styleById(message);
+  var styleById = transformStyleById(vizData);
 
   // scale the bar width and max bar height to the canvas
   var barWidth = ctx.canvas.width / (data.length * 2);
@@ -48,7 +46,7 @@ function drawViz(vizData) {
   // obtain the maximum bar metric value for scaling purposes
   var metricMax = 0;
   data.forEach(function(row){
-    metricMax = Math.max(metricMax, row['barMetric'][0];
+    metricMax = Math.max(metricMax, row['barMetric'][0]);
   })
 
 

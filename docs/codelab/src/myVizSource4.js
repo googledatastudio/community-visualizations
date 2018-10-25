@@ -9,15 +9,15 @@ var ctx = canvasElement.getContext('2d');
 canvasElement.id = 'myViz';
 document.body.appendChild(canvasElement);
 
-function styleById(message){
+function transformStyleById(vizData){
   // parse the style object
   var styleById = {};
 
   for (let styleSection of vizData.config.style) {
     for (let styleElement of styleSection.elements) {
-      styleById[element.id] = {
-        value: element.value,
-        defaultValue: element.defaultValue
+      styleById[styleElement.id] = {
+        value: styleElement.value,
+        defaultValue: styleElement.defaultValue
       };
     }
   }
@@ -43,7 +43,7 @@ function drawViz(vizData) {
   // vertical offset for bar text
   var textYOffset = 20;
 
-  var styleById = styleById(message);
+  var styleById = transformStyleById(vizData);
 
   // fill the bars using the user-selected bar color or the default
   ctx.fillStyle = styleById.barColor.value.color || styleById.barColor.defaultValue;
@@ -51,7 +51,7 @@ function drawViz(vizData) {
   // obtain the maximum bar metric value for scaling purposes
   var metricMax = 0;
   data.forEach(function(row){
-    metricMax = Math.max(metricMax, row['barMetric'][0];
+    metricMax = Math.max(metricMax, row['barMetric'][0]);
   })
 
 
