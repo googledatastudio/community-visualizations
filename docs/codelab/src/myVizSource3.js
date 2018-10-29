@@ -49,7 +49,6 @@ function drawViz(vizData) {
     metricMax = Math.max(metricMax, row['barMetric'][0]);
   })
 
-
   // draw bars
   // add dimension labels below bars
   // 'barDimension' and 'barMetric' come from the id defined in myViz.json
