@@ -2,7 +2,7 @@
   "data": [
     {
       "id": "concepts",
-      "heading": "Concepts",
+      "label": "Concepts",
       "elements": [
         {
           "id": "levels",
@@ -28,7 +28,7 @@
   "style": [
     {
       "id": "styles",
-      "heading": "Style Options",
+      "label": "Style Options",
       "elements": [
         {
           "type": "CHECKBOX",
