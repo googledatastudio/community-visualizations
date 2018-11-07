@@ -17,9 +17,8 @@ If you are not part of the trusted testing group, sign up [using this
 form](https://docs.google.com/forms/d/e/1FAIpQLSeYSUq-ligS_ld1iefqYXjDnCnrEgSbgSxWmLwyC45JlUrfOQ/viewform).
 Please note that it can take a few business days to be added to the group.
 
-## [Viz](/viz)
-The [viz](/viz) folder contains the code for open-source community visualizations. The README
-for each directory contains instructions for viz deployment and usage.
+## [Docs](/docs)
+This is a place for code related to the community visualization documentation.
 
 ## [Utils](/utils)
 This is a place for scripts and other tooling that helps developers working on community
