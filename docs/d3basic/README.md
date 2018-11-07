@@ -2,10 +2,10 @@
 
 This code is the end result of the [external visualizations tutorial](https://developers.google.com/datastudio/visualization/external-libraries).
 
-The [src](./src) filder contains the files needed for the visualization. To deploy the code, run the build script with with a GCP bucket path and the location of `d3.jin.js` as parameters.
+The [src](./src) folder contains the files needed for the visualization. To deploy the code, run the build script with with a GCP bucket path as a parameter.
 
 ```bash
-bash build.sh gs://my-viz-bucket-path path-to-d3.js
+bash build.sh gs://my-viz-bucket-path
 ```
 ## Try it out
 

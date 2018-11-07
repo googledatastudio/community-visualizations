@@ -18,6 +18,6 @@ cp src/d3basic.css deploy/d3basic.css
 
 # deploy files to the GCS bucket
 echo "deploying to $DEV_BUCKET"
-cat src/manifest.json | sed -e "s|MY_GOOGLE_CLOUD_STORAGE_BUCKET|$DEV_BUCKET|" > deploy/manifest.json
-gsutil cp -a public-read deploy/* "gs://$DEV_BUCKET" 
+cat src/manifest.json | sed "s|MY_GOOGLE_CLOUD_STORAGE_BUCKET|$DEV_BUCKET|" > deploy/manifest.json
+gsutil cp -a public-read deploy/* "gs://$DEV_BUCKET"
 
