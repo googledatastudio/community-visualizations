@@ -1,6 +1,7 @@
 # Community visualization docs code samples
 
-* [codelab](./codelab): Code for the codelab.
+* [Codelab](./codelab): Code for the codelab.
+* [d3basic](./d3basic): Code to demonstrate external library use.
 
 
 ## Requirements
