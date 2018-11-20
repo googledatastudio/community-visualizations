@@ -20,4 +20,4 @@ function drawViz(data) {
 }
 
 // subscribe to data and style changes.
-dscc.subscribeToData(drawViz, {transform: dscc.tableTransform});
+dscc.subscribeToData(drawViz, {transform: dscc.objectTransform});
