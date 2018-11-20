@@ -9,24 +9,8 @@ var ctx = canvasElement.getContext('2d');
 canvasElement.id = 'myViz';
 document.body.appendChild(canvasElement);
 
-function transformStyleById(vizData){
-  // parse the style object
-  var styleById = {};
-
-  for (let styleSection of vizData.config.style) {
-    for (let styleElement of styleSection.elements) {
-      styleById[styleElement.id] = {
-        value: styleElement.value,
-        defaultValue: styleElement.defaultValue
-      };
-    }
-  }
-  return styleById;
-}
-
-function drawViz(vizData) {
-  // parse the data into a row of rows format
-  var data = dscc.rowsByConfigId(vizData).DEFAULT;
+function drawViz(data) {
+  var rowData = data.tables.DEFAULT;
   var ctx = canvasElement.getContext('2d');
 
   // clear the canvas.
@@ -37,36 +21,34 @@ function drawViz(vizData) {
   ctx.canvas.height = dscc.getHeight() - 100;
 
   // scale the bar width and max bar height to the canvas
-  var barWidth = ctx.canvas.width / (data.length * 2);
+  var barWidth = ctx.canvas.width / (rowData.length * 2);
   var maxBarHeight = ctx.canvas.height - 20;
 
   // vertical offset for bar text
   var textYOffset = 20;
 
-  var styleById = transformStyleById(vizData);
-
-  // fill the bars using the user-selected bar color or the default
-  ctx.fillStyle = styleById.barColor.value.color || styleById.barColor.defaultValue;
+  ctx.fillStyle = data.style.barColor.value.color || data.style.barColor.defaultValue;
 
   // obtain the maximum bar metric value for scaling purposes
   var metricMax = 0;
-  data.forEach(function(row){
+  rowData.forEach(function(row){
     metricMax = Math.max(metricMax, row['barMetric'][0]);
   })
 
   // draw bars
   // add dimension labels below bars
   // 'barDimension' and 'barMetric' come from the id defined in myViz.json
-  data.forEach(function(row, i) {
+  rowData.forEach(function(row, i) {
+
     // calculates the height of the bar using the row value, maximum bar
     // height, and the maximum metric value calculated earlier
     var barHeight = Math.round(
-      -1 * ((row['barMetric'][0] * maxBarHeight) / metricMax)
+        -1 * ((row['barMetric'][0] * maxBarHeight) / metricMax)
     );
 
     // calculates the x coordinate of the bar based on the width of the convas
     // and the width of the bar
-    var barX = (ctx.canvas.width / data.length) * i + barWidth / 2;
+    var barX = (ctx.canvas.width /rowData.length) * i + barWidth / 2;
 
     ctx.fillRect(barX, maxBarHeight, barWidth, barHeight);
 
@@ -75,25 +57,15 @@ function drawViz(vizData) {
     var textY = maxBarHeight + textYOffset;
 
     ctx.fillText(barText, textX, textY);
+    // Get the human-readable name of the metric and dimension
+
+    var metricName = data.fields['barMetric'][0].name;
+    var dimensionName = data.fields['barDimension'][0].name;
+
+    titleElement.innerText = metricName + ' by ' + dimensionName;
   });
-
-  // Update the title element using dimension/metric names.
-  var titleElement = document.getElementById('myVizTitle');
-
-  // Get the fields indexed by Data Studio ID
-  var fieldsById = dscc.fieldsById(vizData);
-
-  // Get the Data Studio ID of the metric and dimension
-  var metricId = vizData.config.data[0].elements[1].value[0];
-  var dimensionId = vizData.config.data[0].elements[0].value[0];
-
-  // Get the human-readable name of the metric and dimension
-  var metricName = fieldsById[metricId].name;
-  var dimensionName = fieldsById[dimensionId].name;
-
-  titleElement.innerText = metricName + ' by ' + dimensionName;
 
 }
 
 // subscribe to data and style changes.
-dscc.subscribeToData(drawViz);
+dscc.subscribeToData(drawViz, {transform: dscc.objectTransform});
