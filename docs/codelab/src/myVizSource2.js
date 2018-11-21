@@ -4,22 +4,7 @@ var ctx = canvasElement.getContext('2d');
 canvasElement.id = 'myViz';
 document.body.appendChild(canvasElement);
 
-function transformStyleById(vizData){
-  // parse the style object
-  var styleById = {};
-
-  for (let styleSection of vizData.config.style) {
-    for (let styleElement of styleSection.elements) {
-      styleById[styleElement.id] = {
-        value: styleElement.value,
-        defaultValue: styleElement.defaultValue
-      };
-    }
-  }
-  return styleById;
-}
-
-function drawViz(vizData) {
+function drawViz(data) {
   var ctx = canvasElement.getContext('2d');
 
   // clear the canvas.
@@ -29,13 +14,10 @@ function drawViz(vizData) {
   ctx.canvas.width = dscc.getWidth() - 20;
   ctx.canvas.height = dscc.getHeight() - 100;
 
-  var styleById = transformStyleById(vizData);
-
-  // fill the bars using the user-selected bar color or the default
-  ctx.fillStyle = styleById.barColor.value.color || styleById.barColor.defaultValue;
+  ctx.fillStyle = data.style.barColor.value.color || data.style.barColor.defaultValue;
   ctx.fillRect(10, 10, 100, 100);
 
 }
 
 // subscribe to data and style changes.
-dscc.subscribeToData(drawViz);
+dscc.subscribeToData(drawViz, {transform: dscc.objectTransform});

@@ -4,7 +4,7 @@ var ctx = canvasElement.getContext('2d');
 canvasElement.id = 'myViz';
 document.body.appendChild(canvasElement);
 
-function drawViz(vizData) {
+function drawViz(data) {
   var ctx = canvasElement.getContext('2d');
 
   // clear the canvas.
@@ -20,4 +20,4 @@ function drawViz(vizData) {
 }
 
 // subscribe to data and style changes.
-dscc.subscribeToData(drawViz);
+dscc.subscribeToData(drawViz, {transform: dscc.objectTransform});
