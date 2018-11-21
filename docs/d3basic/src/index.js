@@ -1,21 +1,6 @@
-function transformStyleById(data){
-    // parse the style object
-    var styleById = {};
-
-    for (let styleSection of data.config.style) {
-        for (let styleElement of styleSection.elements) {
-            styleById[styleElement.id] = {
-                value: styleElement.value,
-                defaultValue: styleElement.defaultValue
-            };
-        }
-    }
-    return styleById;
-}
-
 dscc.subscribeToData(function(data) {
-  var dataByConfigId = dscc.rowsByConfigId(data).DEFAULT;
-  var styleByConfigId = transformStyleById(data);
+  var dataByConfigId = data.tables.DEFAULT;
+  var styleByConfigId = data.style;
 
   // remove the canvas if it exists
   d3.select('body')
@@ -105,4 +90,4 @@ dscc.subscribeToData(function(data) {
       return yScale(d.dimension) + yScale.bandwidth() / 2;
     })
     .attr('x', 10);
-});
+}, {transform: dscc.objectTransform});
