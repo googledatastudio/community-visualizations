@@ -68,7 +68,7 @@ function createRoot() {
 }
 
 
-function mouseOver(elem, d, tooltip) {
+function mouseOver(elem, d, tooltip, tooltipXOffset, tooltipYOffset) {
   d3.select(elem).attr('opacity', 1);
   var dataKey = d.data.key ? d.data.key : 'total';
   var tooltipText = dataKey + ': ' + d.value;
@@ -79,8 +79,8 @@ function mouseOver(elem, d, tooltip) {
     .delay(100)
     .duration(600)
     .style('visibility', 'visible')
-    .style('top', boundingBox.top + 5 + 'px')
-    .style('left', boundingBox.left + 5 + 'px');
+    .style('top', (boundingBox.top + tooltipYOffset) + 'px')
+    .style('left', (boundingBox.left + tooltipXOffset) + 'px');
 }
 
 function mouseOut(elem, d, tooltip) {
@@ -167,7 +167,7 @@ function render(root, style, colorScale) {
     .attr('stroke', 'black')
     .attr('opacity', 0.2)
     .on('mouseover', function(d) {
-      mouseOver(this, d, tooltip);
+      mouseOver(this, d, tooltip, style.tooltipXOffset, style.tooltipYOffset);
     })
     .on('mouseout', function(d) {
       mouseOut(this, d, tooltip);
