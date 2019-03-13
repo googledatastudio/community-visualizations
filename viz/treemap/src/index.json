@@ -55,6 +55,18 @@
           "defaultValue": "0"
         },
         {
+          "type": "INTERVAL",
+          "id": "tooltipXOffset",
+          "label": "Horizontal tooltip offset",
+          "defaultValue": "5"
+        },
+        {
+          "type": "INTERVAL",
+          "id": "tooltipYOffset",
+          "label": "Vertical tooltip offset",
+          "defaultValue": "5"
+        },
+        {
           "type": "FONT_SIZE",
           "id": "fontSize",
           "label": "Font Size",
