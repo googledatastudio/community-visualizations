@@ -1,0 +1,25 @@
+{
+  "name": "Day/Hour Heatmp",
+  "organization": "ClickInsight",
+  "description": "Day/Hour Heatmap",
+  "logoUrl": "https://logo",
+  "organizationUrl": "https://url",
+  "supportUrl": "https://url",
+  "privacyPolicyUrl": "https://url",
+  "termsOfServiceUrl": "https://url",
+  "packageUrl": "https://url",
+  "supportUrl": "https://url",
+  "devMode": true,
+  "components": [
+    {
+      "name": "myViz",
+      "description": "Day/Hour Heatmap",
+      "iconUrl": "https://url",
+      "resource": {
+    "js": "gs://cc-community-viz/heatmap-d3/myViz.js",
+    "config": "gs://cc-community-viz/heatmap-d3/myViz.json",
+    "css": "gs://cc-community-viz/heatmap-d3/myViz.css"
+      }
+    }
+  ]
+}

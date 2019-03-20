@@ -1,0 +1,39 @@
+{
+  "data": [
+    {
+      "id": "concepts",
+      "label": "Concepts",
+      "elements": [
+        {
+          "id": "day",
+          "label": "Day",
+          "type": "DIMENSION",
+          "options": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "id": "hour",
+          "label": "Hour",
+          "type": "DIMENSION",
+          "options": {
+            "min": 1,
+            "max": 1
+          }
+        },
+        {
+          "id": "value",
+          "label": "Value",
+          "type": "METRIC",
+          "options": {
+            "min": 1,
+            "max": 1
+          }
+        }
+      ]
+    }
+  ],
+  "style": [
+  ]
+}
