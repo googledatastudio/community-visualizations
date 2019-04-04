@@ -1,0 +1,25 @@
+{
+  "name": "My Visualizations",
+  "organization": "MyOrg",
+  "description": "My first visualization package.",
+  "logoUrl": "https://logo",
+  "organizationUrl": "https://url",
+  "supportUrl": "https://url",
+  "privacyPolicyUrl": "https://url",
+  "termsOfServiceUrl": "https://url",
+  "packageUrl": "https://url",
+  "supportUrl": "https://url",
+  "devMode": true,
+  "components": [
+    {
+      "name": "myViz",
+      "description": "My first Community Visualization",
+      "iconUrl": "https://url",
+      "resource": {
+        "js": "gs://yulanlin-cv-dev/interactions/index.js",
+        "config": "gs://yulanlin-cv-dev/interactions/index.json",
+        "css": "gs://yulanlin-cv-dev/interactions/index.css"
+      }
+    }
+  ]
+}

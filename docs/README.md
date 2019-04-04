@@ -1,7 +1,7 @@
 # Community visualization docs code samples
 
 * [Codelab](./codelab): Code for the codelab.
-* [d3basic](./d3basic): Code to demonstrate external library use.
+* [Interactions](./interactions): Code to showcase interactions.
 
 
 ## Requirements
