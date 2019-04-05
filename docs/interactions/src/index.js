@@ -1,17 +1,4 @@
 const dscc = require('@google/dscc');
-import * as local from '../scripts/data/localData.js';
-
-const LOCAL = false;
-
-const onClick = (e) => {
-  const barData = JSON.parse(e.srcElement.attributes.data.value);
-  var FILTER = dscc.InteractionType.FILTER;
-  var intxnData = {
-    "concepts": [barData.dimId],
-    "values": [[barData.dim]]
-  };
-  dscc.sendInteraction('onClick', FILTER, intxnData);
-}
 
 function drawViz(data) {
 
@@ -30,13 +17,11 @@ function drawViz(data) {
   }
 
   const svg = document.createElementNS('http://www.w3.org/2000/svg', "svg");
-  svg.setAttribute('height', `${height}`);
-  svg.setAttribute('width', `${width}`);
+  svg.setAttribute('height', `${height}px`);
+  svg.setAttribute('width', `${width}px`);
 
   const maxBarHeight = height - padding.top - padding.bottom;
   const barWidth = width / (rowData.length * 2) ;
-
-
 
   // obtain the maximum bar metric value for scaling purposes
   var metricMax = 0;
@@ -45,12 +30,10 @@ function drawViz(data) {
     metricMax = Math.max(metricMax, row['barMetric'][0]);
   });
 
-
-  // draw bars
-  // add dimension labels below bars
-  // 'barDimension' and 'barMetric' come from the id defined in myViz.json
   rowData.forEach(function (row, i) {
 
+    // 'barDimension' and 'barMetric' come from the id defined in myViz.json
+    // 'dimId' is Data Studio's unique field ID, used for the filter interaction
     const barData = {
       'dim': row['barDimension'][0],
       'met': row['barMetric'][0],
@@ -60,24 +43,25 @@ function drawViz(data) {
     // calculates the height of the bar using the row value, maximum bar
     // height, and the maximum metric value calculated earlier
     var barHeight = Math.round(
-      ((row['barMetric'][0] * maxBarHeight) / metricMax)
-    );
+        ((barData['met'] * maxBarHeight) / metricMax)
+        );
 
-    // calculates the x coordinate of the bar based on the width of the convas
+    // normalizes the x coordinate of the bar based on the width of the convas
     // and the width of the bar
-    var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-
     var barX = (width / rowData.length) * i + barWidth / 2;
+
+    // create the "bar"
+    var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 
     rect.setAttribute('x', barX);
     rect.setAttribute('y', maxBarHeight - barHeight);
-
     rect.setAttribute('width', barWidth);
     rect.setAttribute('height', barHeight);
     rect.setAttribute('data', JSON.stringify(barData));
-    rect.addEventListener('click', onClick);
 
+    // use style selector from Data Studio
     rect.style.fill = data.style.barColor.value? data.style.barColor.value.color : data.style.barColor.defaultValue;;
+    rect.addEventListener('click', onClick);
 
     svg.appendChild(rect);
 
@@ -88,7 +72,7 @@ function drawViz(data) {
     text.setAttribute('text-anchor', 'middle');
     var textY = maxBarHeight + padding.top;
     text.setAttribute('y', textY);
-    text.innerHTML = row['barDimension'][0];
+    text.innerHTML = barData['dim'];
 
     svg.appendChild(text);
 
@@ -97,9 +81,14 @@ function drawViz(data) {
   document.body.appendChild(svg);
 }
 
-// renders locally
-if (LOCAL) {
-  drawViz(local.message);
-} else {
-  dscc.subscribeToData(drawViz, { transform: dscc.objectTransform });
+const onClick = (e) => {
+  const barData = JSON.parse(e.srcElement.attributes.data.value);
+  var FILTER = dscc.InteractionType.FILTER;
+  var interactionData = {
+    "concepts": [barData.dimId],
+    "values": [[barData.dim]]
+  };
+  dscc.sendInteraction('onClick', FILTER, interactionData);
 }
+
+dscc.subscribeToData(drawViz, { transform: dscc.objectTransform });
