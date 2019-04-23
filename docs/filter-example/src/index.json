@@ -39,8 +39,10 @@
       ]
     }
   ],
-  "interactions": [{
-    "id": "onClick",
-    "supportedActions": ["FILTER"]
-  }]
+  "interactions": [
+    {
+      "id": "onClick",
+      "supportedActions": ["FILTER"]
+    }
+  ]
 }

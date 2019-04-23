@@ -1,7 +1,7 @@
 # Community visualization docs code samples
 
 * [Codelab](./codelab): Code for the codelab.
-* [Interactions](./interactions): Code to showcase interactions.
+* [Filter Example](./filter-example): Code demonstrating using a viz as a filter.
 
 
 ## Requirements

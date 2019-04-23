@@ -6,31 +6,13 @@ Visualizations](https://developers.google.com/datastudio/visualization).
 Community visualizations allow Data Studio users to create custom visualizations
 that integrate into their dashboards.
 
-
-## Trusted testing
-The community visualization feature is currently in trusted testing. You will
-not be able to use Data Studio community visualizations unless you are [in the
-trusted testing
-group](https://groups.google.com/forum/#!forum/data-studio-dev-whitelist-cv).
-
-If you are not part of the trusted testing group, sign up [using this
-form](https://docs.google.com/forms/d/e/1FAIpQLSeYSUq-ligS_ld1iefqYXjDnCnrEgSbgSxWmLwyC45JlUrfOQ/viewform).
-Please note that it can take a few business days to be added to the group.
-
 ## [Docs](/docs)
 This is a place for code related to the community visualization documentation.
 
-## [Utils](/utils)
-This is a place for scripts and other tooling that helps developers working on community
-visualizations.
-
 ### Community contributions
-Send us a [pull request](https://github.com/googledatastudio/community-visualizations) to
-share your visualizations or workflows with this repository.
+Send us a [pull request](https://github.com/googledatastudio/experimental-visualizations) to
+share your visualizations or workflows with the community.
 
-Alternatively you can link to your own repository. In that case, send a [pull
-request](https://github.com/googledatastudio/community-visualization) for the `README` file
-only with a link to your repository.
 
 ## Report Issues
 
