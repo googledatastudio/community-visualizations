@@ -10,7 +10,6 @@ module.exports = [
       path: path.resolve(__dirname, 'build'),
     },
     plugins: [
-      new CopyWebpackPlugin([{from: path.join('src/index.css'), to: '.'}]),
       new CopyWebpackPlugin([{from: path.join('src/index.json'), to: '.'}]),
       new CopyWebpackPlugin([{from: path.join('src/manifest.json'), to: '.'}]),
 

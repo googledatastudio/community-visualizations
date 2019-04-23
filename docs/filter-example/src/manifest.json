@@ -16,9 +16,9 @@
       "description": "My first Community Visualization",
       "iconUrl": "https://url",
       "resource": {
-        "js": "gs://yulanlin-cv-dev/interactions/index.js",
-        "config": "gs://yulanlin-cv-dev/interactions/index.json",
-        "css": "gs://yulanlin-cv-dev/interactions/index.css"
+        "js": "{{YOUR_GCS_BUCKET}}/index.js",
+        "config": "{{YOUR_GCS_BUCKET}}/interactions/index.json",
+        "css": "{{YOUR_GCS_BUCKET}}/interactions/index.css"
       }
     }
   ]
