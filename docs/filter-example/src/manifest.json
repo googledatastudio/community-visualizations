@@ -1,0 +1,24 @@
+{
+  "name": "Filter Interactions Sample",
+  "organization": "Data Studio Developer Relations",
+  "description": "Bar Chart using a community visualization as a filter",
+  "logoUrl": "https://www.gstatic.com/images/branding/product/1x/google_data_studio_48dp.png",
+  "organizationUrl": "https://developers.google.com/datastudio",
+  "supportUrl": "https://developers.google.com/datastudio/support",
+  "privacyPolicyUrl": "https://developers.google.com/datastudio",
+  "termsOfServiceUrl": "https://developers.google.com/datastudio",
+  "packageUrl": "https://developers.google.com/datastudio",
+  "devMode": true,
+  "components": [
+    {
+      "name": "barchart-filter",
+      "description": "Bar Chart with filtering",
+      "iconUrl": "https://www.gstatic.com/images/icons/material/system_gm/1x/bar_chart_black_24dp.png      ",
+      "resource": {
+        "js": "gs://community-viz-docs/filter-example/index.js",
+        "config": "gs://community-viz-docs/filter-example/index.json",
+        "css": "gs://community-viz-docs/filter-example/index.css"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "devDependencies": {
+    "@google/dscc": "^0.3.8",
+    "copy-webpack-plugin": "^5.0.2",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.0",
+    "prettier": "^1.17.0"
+  },
+  "dependencies": {
+  }
+}
