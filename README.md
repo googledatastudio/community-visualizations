@@ -6,19 +6,19 @@ This repository contains open-source code for Data Studio
 Community visualizations allow Data Studio users to create custom visualizations
 that integrate into their dashboards.
 
-## [Docs](/docs)
+## [Documentation sample code](/docs)
 
-Code related to community visualization documentation.
-
-### Community contributions
-
-Share your visualizations in our [experimental-visualizations] repository.
+Working sample code for the codelab and interactions documentation.
 
 ## Report Issues
 
 -   Report issues related to the Community Visualizations in [this repository]
 -   Report issues related to Community Visualization feature in [Data Studio]
 -   Report issues related to Data Studio [in general]
+
+### Community contributions
+
+Share your visualizations in our [experimental-visualizations] repository.
 
 ## Additional Resources
 

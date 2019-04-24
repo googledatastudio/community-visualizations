@@ -1,4 +1,4 @@
-# Community visualization docs code samples
+# Community visualization code samples
 
 *   [Codelab](./codelab): Code for the codelab.
 *   [Filter Example](./filter-example): Code demonstrating using a viz as a

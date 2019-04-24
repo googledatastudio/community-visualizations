@@ -1,18 +1,19 @@
-const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = [
   {
-    mode: 'development',
-    entry: './src/index.js',
+    mode: "development",
+    entry: "./src/index.js",
     output: {
-      filename: 'index.js',
-      path: path.resolve(__dirname, 'build'),
+      filename: "index.js",
+      path: path.resolve(__dirname, "build")
     },
     plugins: [
-      new CopyWebpackPlugin([{from: path.join('src/index.json'), to: '.'}]),
-      new CopyWebpackPlugin([{from: path.join('src/manifest.json'), to: '.'}]),
-
-    ],
-  },
+      new CopyWebpackPlugin([
+        { from: path.join("src/index.json"), to: "." },
+        { from: path.join("src/manifest.json"), to: "." }
+      ])
+    ]
+  }
 ];
