@@ -21,4 +21,4 @@ cp src/manifest.json deploy/manifest.json
 # deploy files to the GCS bucket
 echo "deploying to $DEV_BUCKET"
 cat src/manifest.json | sed -e "s|MY_GOOGLE_CLOUD_STORAGE_BUCKET|$DEV_BUCKET|" > deploy/manifest.json
-gsutil cp -a public-read deploy/* "gs://$DEV_BUCKET"
+gsutil cp -a public-read deploy/* "$DEV_BUCKET"
