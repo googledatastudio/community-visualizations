@@ -1,16 +1,16 @@
 const dscc = require('@google/dscc');
 
 const clearTable = () => {
-  let table = document.getElementsByTagName("TABLE");
+  const table = document.getElementsByTagName("table");
   if (table.length > 0) {
     document.body.removeChild(table[0]);
   }
 }
 
 const setStyle = (data) => {
-  let fontFamily = data.theme.themeAccentFontFamily;
+  const fontFamily = data.theme.themeAccentFontFamily;
   document.body.style.fontFamily = fontFamily;
-  let fontColor = data.theme.themeAccentFontColor.color;
+  const fontColor = data.theme.themeAccentFontColor.color;
   document.body.style.color = fontColor;
 }
 
@@ -18,28 +18,28 @@ const drawViz = (data) => {
   clearTable();
   setStyle(data);
 
-  let table = document.createElement("table");
-  var rows = data.tables.DEFAULT.rows; 
+  const table = document.createElement("table");
+  const rows = data.tables.DEFAULT.rows; 
 
   // make the header
-  let th = document.createElement("th");
-  let thr = document.createElement("tr");
+  const thead = document.createElement("thead");
+  const thr = document.createElement("tr");
   for (let heading of data.tables.DEFAULT.headers){
-    let td = document.createElement("td");
-    let text = document.createTextNode(heading.name);
-    td.appendChild(text);
-    thr.appendChild(td);
+    const th = document.createElement("th");
+    const text = document.createTextNode(heading.name);
+    th.appendChild(text);
+    thr.appendChild(th);
   }
-  th.appendChild(thr);
-  table.append(th);
+  thead.appendChild(thr);
+  table.append(thead);
 
   // make the table body
-  let body = document.createElement("tbody");
+  const body = document.createElement("tbody");
   for (let row of rows){
-    var tr = document.createElement("tr");
+    const tr = document.createElement("tr");
     for (let cell of row){
-      let td = document.createElement("td");
-      let text = document.createTextNode(cell);
+      const td = document.createElement("td");
+      const text = document.createTextNode(cell);
       td.appendChild(text)
       tr.appendChild(td);
     }
