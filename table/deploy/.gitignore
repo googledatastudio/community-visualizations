@@ -1,0 +1,2 @@
+# Ignore files (since these should be generated baseed on src) 
+!.gitignore
