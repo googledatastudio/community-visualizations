@@ -1,0 +1,25 @@
+{
+  "name": "Table",
+  "organization": "[My name]",
+  "description": "My first visualization package.",
+  "logoUrl": "https://storage.googleapis.com/community-visualizations-codelabs/table/table_icon.png",
+  "organizationUrl": "https://github.com/googledatastudio/",
+  "supportUrl": "http://github.com/googledatastudio/community-visualizations",
+  "privacyPolicyUrl": "http://github.com/googledatastudio/community-visualizations",
+  "termsOfServiceUrl": "http://github.com/googledatastudio/community-visualizations",
+  "packageUrl": "https://datastudio.google.com/reporting/bf9dc7e0-9c39-4af2-80f6-7dbe8bdb6e17",
+  "devMode": true,
+  "components": [
+    {
+      "id": "table",
+      "name": "Custom Table",
+      "description": "My first Community Visualization",
+      "iconUrl": "https://storage.googleapis.com/community-visualizations-codelabs/table/table_icon.png",
+      "resource": {
+        "js": "gs://community-visualizations-codelabs/table/index.js",
+        "config": "gs://community-visualizations-codelabs/table/index.json",
+        "css": "gs://community-visualizations-codelabs/table/index.css"
+      }
+    }
+  ]
+}
