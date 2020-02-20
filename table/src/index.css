@@ -1,0 +1,23 @@
+thead {
+    display: table-header-group;
+    text-align: left;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+thead tr {
+    border-bottom: 1px solid #000;
+}
+th {
+    padding: 10px;
+}
+
+tbody {
+    display: table-row-group;
+}
+
+td {
+    padding: 10px;
+}
+
